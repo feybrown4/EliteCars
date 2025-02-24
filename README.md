@@ -20,6 +20,7 @@ It also provides car modifications (pimp)
 
 ## Monorepo structure
 
+```
 project-root/
 │── backend/
 │ ├── admin/
@@ -34,6 +35,7 @@ project-root/
 ├── compose.yaml
 │
 └── README.md
+```
 
 ## Technologies
 
