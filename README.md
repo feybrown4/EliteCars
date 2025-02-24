@@ -18,6 +18,23 @@ It also provides car modifications (pimp)
 - 3D Car checkout
 - Gamified User interface
 
+## Monorepo structure
+
+project-root/
+│── backend/
+│ ├── admin/
+│ │
+│ └── app/
+│
+│── UI/
+│ ├── admin/
+│ │
+│ └── app/
+│
+├── compose.yaml
+│
+└── README.md
+
 ## Technologies
 
 - c# .NET
