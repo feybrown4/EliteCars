@@ -45,4 +45,3 @@ project-root/
 - Tailwind
 - Shadcn/ui
 - MSSQL Server
-- Docker
