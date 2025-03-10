@@ -40,7 +40,7 @@ project-root/
 
 ## Technologies
 
-- c# .NET
+- c# /ASP.NET Core
 - NextJS
 - Tailwind
 - Shadcn/ui
