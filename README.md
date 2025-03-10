@@ -23,16 +23,17 @@ It also provides car modifications (pimp)
 ```
 project-root/
 │── backend/
-│ ├── admin/
 │ │
-│ └── app/
+│ └── elitecars-admin/
+│ │
+│ └── elitecars-app/
+│
 │
 │── UI/
 │ ├── admin/
 │ │
 │ └── app/
 │
-├── compose.yaml
 │
 └── README.md
 ```

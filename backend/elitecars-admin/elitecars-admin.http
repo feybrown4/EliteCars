@@ -1,4 +1,4 @@
-@elitecars_admin_HostAddress = http://localhost:5062
+@elitecars_admin_HostAddress = http://localhost:5259
 
 GET {{elitecars_admin_HostAddress}}/weatherforecast/
 Accept: application/json
