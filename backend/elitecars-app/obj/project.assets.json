@@ -81,11 +81,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Amiel Solution\\Documents\\Elitecars\\backend\\elitecars-app\\elitecars-app.csproj",
+      "projectUniqueName": "C:\\Users\\Amiel Solution\\Desktop\\EliteCars\\backend\\elitecars-app\\elitecars-app.csproj",
       "projectName": "elitecars-app",
-      "projectPath": "C:\\Users\\Amiel Solution\\Documents\\Elitecars\\backend\\elitecars-app\\elitecars-app.csproj",
+      "projectPath": "C:\\Users\\Amiel Solution\\Desktop\\EliteCars\\backend\\elitecars-app\\elitecars-app.csproj",
       "packagesPath": "C:\\Users\\Amiel Solution\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Amiel Solution\\Documents\\Elitecars\\backend\\elitecars-app\\obj\\",
+      "outputPath": "C:\\Users\\Amiel Solution\\Desktop\\EliteCars\\backend\\elitecars-app\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
