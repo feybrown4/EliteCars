@@ -1,6 +1,27 @@
-@elitecars_admin_HostAddress = http://localhost:5259
+@elitecars_admin_HostAddress = http://localhost:5259/api
 
-GET {{elitecars_admin_HostAddress}}/weatherforecast/
+GET {{elitecars_admin_HostAddress}}/cars
 Accept: application/json
 
 ###
+
+GET {{elitecars_admin_HostAddress}}/cars/803351
+Accept: application/json
+
+###
+
+POST {{elitecars_admin_HostAddress}}/cars
+Content-Type: application/json
+
+{
+  "name": "Tesla Model S",
+  "is_active": true,
+  "is_modify": false,
+  "car_type": "Electric",
+  "quantity": 5,
+  "model": "Model S",
+  "year": 2023,
+  "price": 89990.00,
+  "image": "tesla-model-s.jpg",
+  "description": "Luxury all-electric sedan with advanced autopilot capabilities and long range battery"
+}
