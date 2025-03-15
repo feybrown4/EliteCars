@@ -1,6 +1,7 @@
 using elitecars_admin.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.Metrics;
+
+
 
 public class ApplicationDbContext : DbContext
 {
@@ -25,6 +26,7 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
+       
+        
     }
 }

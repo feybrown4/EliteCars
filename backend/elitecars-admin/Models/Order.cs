@@ -8,5 +8,7 @@
         public string Status { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public DateTime OrderDate { get; set; } = DateTime.Now;
+        public Car Car { get; set; }
+        public Customer Customer { get; set; }
     }
 }

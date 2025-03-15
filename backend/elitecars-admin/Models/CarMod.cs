@@ -7,5 +7,7 @@
         public int CarId { get; set; }
         public string ModificationName { get; set; } = string.Empty;
         public decimal Amount { get; set; }
+        public CarOption CarOption { get; set; }
+        public Car Car { get; set; }
     }
 }
