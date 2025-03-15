@@ -2,5 +2,7 @@
 {
     public class Permission
     {
+        public int PermissionId { get; set; }
+        public string permission { get; set; } = string.Empty;
     }
 }
