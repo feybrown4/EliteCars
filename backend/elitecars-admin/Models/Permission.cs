@@ -2,8 +2,8 @@
 {
     public class Permission
     {
-        public int PermissionId { get; set; }
-        public string permission { get; set; } = string.Empty;
-        public ICollection<RolePermission> RolePermissions { get; set; }
+        public required  int PermissionId { get; set; }
+        public required string permission { get; set; } 
+        public required RolePermission RolePermissions { get; set; }
     }
 }

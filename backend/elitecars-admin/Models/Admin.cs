@@ -2,17 +2,19 @@ namespace elitecars_admin.Models;
 
 public class Admin
 {
-    public int AdminId { get; set; }
+    public required int AdminId { get; set; }
 
-    public string FirstName { get; set; } = null!;
+    public required string FirstName { get; set; } 
 
-    public string LastName { get; set; } = null!;
+    public required string LastName { get; set; }
 
-    public string Email { get; set; } = null!;
+    public required string Email { get; set; } 
 
-    public string Password { get; set; } = null!;
+    public required string Password { get; set; }
 
-    public Role RoleId { get; set; } = null!;
+    public required int RoleId { get; set; }
 
-    public ICollection<Car> Cars { get; set; } 
+    public ICollection<Car> Cars { get; set; } = [];
+
+    public required Role Role { get; set; }
 }

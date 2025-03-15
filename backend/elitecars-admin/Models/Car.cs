@@ -18,40 +18,41 @@ public class Car(
 )
 {
     [JsonPropertyName("car_id")]
-    public int CarId { get; set; } = CarId;
+    public required int CarId { get; set; } 
 
-    public string Name { get; set; } = Name;
+    public required string Name { get; set; } 
 
     [JsonPropertyName("is_active")]
-    public bool IsActive { get; set; } = IsActive;
+    public required bool IsActive { get; set; } 
 
     [JsonPropertyName("is_modify")]
-    public bool IsModify { get; set; } = IsModify;
+    public required bool IsModify { get; set; } 
 
     [JsonPropertyName("car_type")]
-    public string CarType { get; set; } = CarType;
+    public required string CarType { get; set; } 
 
-    public int Quantity { get; set; } = Quantity;
+    public required int Quantity { get; set; } 
 
-    public string Model { get; set; } = Model;
+    public required string Model { get; set; } 
 
-    public int Year { get; set; } = Year;
+    public required int Year { get; set; } 
 
-    public decimal Price { get; set; } = Price;
+    public required decimal Price { get; set; } 
 
-    public string Image { get; set; } = Image;
+    public required string Image { get; set; }
 
-    public string Description { get; set; } = Description;
+    public required string Description { get; set; } 
 
-    // public Admin Admin_Id { get; set; } = null!;
+    public required int  AdminId { get; set; }
 
     [JsonPropertyName("created_at")]
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-    public Admin Admin { get; set; }
-    public ICollection<Favorite> Favorites { get; set; }
-    public ICollection<Cart> Carts { get; set; } 
-    public ICollection<Order> Orders { get; set; } 
-    public ICollection<CarOption> CarOptions { get; set; } 
-    public ICollection<Inventory> Inventories { get; set; } 
+    public required Admin Admin { get; set; }
+    public ICollection<Favorite> Favorites { get; set; } = [];
+    public ICollection<Cart> Carts { get; set; } = [];
+    public ICollection<Order> Orders { get; set; } = [];
+    public ICollection<CarOption> CarOptions { get; set; } = [];
+    public ICollection<Inventory> Inventories { get; set; } = [];
+    public  ICollection <CarMod> CarMods { get; set; } = [];
 }

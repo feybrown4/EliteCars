@@ -2,8 +2,11 @@
 {
     public class RolePermission
     {
-        public int RolePermissionId { get; set; }
-        public int RoleId { get; set; }
-        public int PermissionId { get; set; }
+        public required int RolePermissionId { get; set; }
+        public required int RoleId { get; set; }
+        public required int PermissionId { get; set; }
+
+        public ICollection<Role> Roles { get; set; } = [];
+        public required ICollection<Permission> Permissions { get; set; } = [];
     }
 }

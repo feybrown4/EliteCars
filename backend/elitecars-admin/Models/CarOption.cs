@@ -2,10 +2,10 @@
 {
     public class CarOption
     {
-        public int CarOptionId { get; set; }
-        public int CarId { get; set; }
-        public string OptionName { get; set; } = string.Empty;
-        public Car Car { get; set; }
-        public ICollection<CarMod> CarMods { get; set; } 
+        public  required int CarOptionId { get; set; }
+        public required int CarId { get; set; }
+        public required string OptionName { get; set; } 
+        public required Car Car { get; set; }
+        public ICollection<CarMod> CarMods { get; set; } = [];
     }
 }
