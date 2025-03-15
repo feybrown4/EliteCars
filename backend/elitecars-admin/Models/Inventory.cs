@@ -2,9 +2,10 @@
 {
     public class Inventory
     {
-        public int InventoryId { get; set; }
-        public int CarId { get; set; }
+        public required int InventoryId { get; set; }
+        public required int CarId { get; set; }
         public DateTime DateAdded { get; set; } = DateTime.Now;
-        public Car Car { get; set; }
+        public required ICollection<Car> Cars { get; set; } = [];
+
     }
 }
