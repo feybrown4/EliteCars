@@ -13,4 +13,6 @@ public class Admin
     public string Password { get; set; } = null!;
 
     public Role RoleId { get; set; } = null!;
+
+    public ICollection<Car> Cars { get; set; } 
 }

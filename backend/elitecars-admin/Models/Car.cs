@@ -47,4 +47,11 @@ public class Car(
 
     [JsonPropertyName("created_at")]
     public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+
+    public ICollection<Favorite> Favorites { get; set; }
+    public ICollection<Cart> Carts { get; set; } 
+    public ICollection<Order> Orders { get; set; } 
+    public ICollection<CarOption> CarOptions { get; set; } 
+    public ICollection<Inventory> Inventories { get; set; } 
 }

@@ -7,6 +7,9 @@
         public string CustomerLastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
+        public ICollection<Favorite> Favorites { get; set; } 
+        public ICollection<Cart> Carts { get; set; } 
+        public ICollection<Order> Orders { get; set; } 
 
     }
 }
