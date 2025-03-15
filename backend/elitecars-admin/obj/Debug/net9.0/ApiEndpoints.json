@@ -1,0 +1,47 @@
+[
+  {
+    "ContainingType": "elitecars_admin.Controllers.CarController",
+    "Method": "Get",
+    "RelativePath": "api/Cars",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [],
+    "EndpointName": "GetCars"
+  },
+  {
+    "ContainingType": "elitecars_admin.Controllers.CarController",
+    "Method": "Post",
+    "RelativePath": "api/Cars",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "car",
+        "Type": "elitecars_admin.Models.Car",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "EndpointName": "PostACar"
+  },
+  {
+    "ContainingType": "elitecars_admin.Controllers.CarController",
+    "Method": "GetCar",
+    "RelativePath": "api/Cars/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [],
+    "EndpointName": "GetACar"
+  }
+]
