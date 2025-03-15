@@ -1,6 +1,6 @@
 ﻿namespace elitecars_admin.Models
 {
-    public class Favorites
+    public class Favorite
     {
         public int FavoriteId { get; set; }
         public int CarId { get; set; }   
