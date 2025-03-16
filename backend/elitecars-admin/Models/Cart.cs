@@ -2,12 +2,13 @@
 {
     public class Cart
     {
-        public required int CartId { get; set; }
-        public required int CarId { get; set; }
-        public required int CustomerId { get; set; }
-        public required string Quantity { get; set; }
-        public required Car Cars { get; set; } 
-        public required Customer Customers { get; set; } 
+        public int CartId { get; set; }
+        public int CarId { get; set; }
+        public int CustomerId { get; set; }
+        public string Quantity { get; set; } = null!;
 
+        // Navigation properties
+        public Car Cars { get; set; } = null!;
+        public Customer Customers { get; set; } = null!;
     }
 }

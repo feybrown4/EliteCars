@@ -2,8 +2,10 @@
 {
     public class Permission
     {
-        public required  int PermissionId { get; set; }
-        public required string permission { get; set; } 
-        public required RolePermission RolePermissions { get; set; }
+        public int PermissionId { get; set; }
+        public string PermissionName { get; set; } = null!;
+
+        // Navigation properties
+        public RolePermission RolePermissions { get; set; } = null!;
     }
 }

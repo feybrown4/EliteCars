@@ -2,12 +2,14 @@
 {
     public class CarMod
     {
-        public required int CarModId { get; set; }
-        public required int CarOptionId { get; set; }
-        public required int CarId { get; set; }
-        public required string ModificationName { get; set; } 
-        public required decimal Amount { get; set; }
-        public required CarOption CarOption { get; set; }
-        public required Car Car { get; set; }
+        public int CarModId { get; set; }
+        public int CarOptionId { get; set; }
+        public int CarId { get; set; }
+        public string ModificationName { get; set; } = null!;
+        public decimal Amount { get; set; }
+
+        // Navigation properties
+        public CarOption CarOption { get; set; } = null!;
+        public Car Car { get; set; } = null!;
     }
 }

@@ -2,10 +2,12 @@
 {
     public class CarOption
     {
-        public  required int CarOptionId { get; set; }
-        public required int CarId { get; set; }
-        public required string OptionName { get; set; } 
-        public required Car Car { get; set; }
-        public ICollection<CarMod> CarMods { get; set; } = [];
+        public int CarOptionId { get; set; }
+        public int CarId { get; set; }
+        public string OptionName { get; set; } = null!;
+
+        // Navigation properties
+        public Car Car { get; set; } = null!;
+        public ICollection<CarMod> CarMods { get; set; } = null!;
     }
 }

@@ -2,9 +2,10 @@ namespace elitecars_admin.Models;
 
 public class Role
 {
-    public required int RoleId { get; set; }
-    public required string RoleName { get; set; } 
+    public int RoleId { get; set; }
+    public string RoleName { get; set; } = null!;
 
-    public required RolePermission RolePermissions { get; set; } 
-    public ICollection<Admin> Admin { get; set; } = [];
+    // Navigation properties
+    public RolePermission RolePermissions { get; set; } = null!;
+    public ICollection<Admin> Admin { get; set; } = null!;
 }
