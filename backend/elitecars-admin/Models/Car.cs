@@ -34,6 +34,7 @@ public class Car
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     public int AdminId { get; set; }
+    public int InventoryId { get; set; }
 
     // Navigation properties
     public Admin Admin { get; set; } = null!;

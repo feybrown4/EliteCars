@@ -74,6 +74,8 @@ public class ApplicationDbContext : DbContext
             .WithMany(c => c.Orders)
             .HasForeignKey(o => o.CarId);
 
+        
+
 
     }
 }
