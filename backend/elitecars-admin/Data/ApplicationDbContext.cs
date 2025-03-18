@@ -26,9 +26,9 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
 
-        modelBuilder.Entity<RolePermission>()
+       // modelBuilder.Entity<RolePermission>()
                 //composite primary key
-                .HasKey(rp => new { rp.RolePermissionId, rp.RoleId, rp.PermissionId });
+                //.HasKey(rp => new { rp.RolePermissionId, rp.RoleId, rp.PermissionId });
 
         // relationship with role
 
@@ -36,26 +36,43 @@ public class ApplicationDbContext : DbContext
         // relationship with role
 
         modelBuilder.Entity<CarMod>()
-            .HasKey(cm => new { cm.CarModId, cm.CarId } );
+            .HasKey(cm => new { cm.CarModId,cm.CarOptionId, cm.CarId } );
+        // CarMod and CarOption relationship
         modelBuilder.Entity<CarMod>()
-            .HasOne(c => c.Car)
-            .WithMany(cm => cm.CarMods)
-            .HasForeignKey(c => c.CarId);
+            .HasOne(cm => cm.CarOption)
+            .WithMany(co => co.CarMods)
+            .HasForeignKey(cm => cm.CarOptionId);
 
+        // CarMod and Car relationship
+        modelBuilder.Entity<CarMod>()
+            .HasOne(cm => cm.Car)
+            .WithMany(c => c.CarMods)
+            .HasForeignKey(cm => cm.CarId);
+
+        // CarOption and Car relationship
         modelBuilder.Entity<CarOption>()
             .HasKey(co => new { co.CarOptionId, co.CarId }); 
         modelBuilder.Entity<CarOption>()
-            .HasOne(c => c.Car)
-            .WithMany(co => co.CarOptions)
-            .HasForeignKey(c => c.CarId);
+            .HasOne(co => co.Car)
+            .WithMany(c => c.CarOptions)
+            .HasForeignKey(co => co.CarId);
 
+        // Favorite and Car relationship
         modelBuilder.Entity<Favorite>()
             .HasKey(f => new { f.FavoriteId, f.CarId });
         modelBuilder.Entity<Favorite>()
-            .HasOne(c => c.Car)
-            .WithMany(f => f.Favorites)
-            .HasForeignKey(c => c.CarId);
+            .HasOne(f => f.Car)
+            .WithMany(c => c.Favorites)
+            .HasForeignKey(f => f.CarId);
 
+
+        // Order and Car relationship
+        modelBuilder.Entity<Order>()
+            .HasKey( o => new {o.OrderId, o.CarId});
+        modelBuilder.Entity<Order>()
+            .HasOne(o => o.Car)
+            .WithMany(c => c.Orders)
+            .HasForeignKey(o => o.CarId);
 
 
     }

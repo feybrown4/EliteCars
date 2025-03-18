@@ -41,6 +41,6 @@ public class Car
     public ICollection<Cart> Carts { get; set; } = null!;
     public ICollection<Order> Orders { get; set; } = null!;
     public ICollection<CarOption> CarOptions { get; set; } = null!;
-    public ICollection<Inventory> Inventories { get; set; } = null!;
+    public Inventory Inventory { get; set; } = null!;
     public ICollection<CarMod> CarMods { get; set; } = null!;
 }
