@@ -12,8 +12,8 @@ using elitecars_admin.Data;
 namespace elitecars_admin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250319015254_CompletedSchema")]
-    partial class CompletedSchema
+    [Migration("20250319180852_initialcreate")]
+    partial class initialcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,19 +59,13 @@ namespace elitecars_admin.Migrations
             modelBuilder.Entity("elitecars_admin.Models.Car", b =>
                 {
                     b.Property<int>("CarId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("Relational:JsonPropertyName", "car_id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CarId"));
 
                     b.Property<int>("AdminId")
                         .HasColumnType("int");
 
-                    b.Property<int>("AdminId1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AdminRoleId")
+                    b.Property<int>("InventoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("CarType")
@@ -90,9 +84,6 @@ namespace elitecars_admin.Migrations
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("InventoryId")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
@@ -119,11 +110,11 @@ namespace elitecars_admin.Migrations
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
-                    b.HasKey("CarId");
+                    b.HasKey("CarId", "AdminId", "InventoryId");
+
+                    b.HasIndex("AdminId");
 
                     b.HasIndex("InventoryId");
-
-                    b.HasIndex("AdminId1", "AdminRoleId");
 
                     b.ToTable("Cars");
                 });
@@ -139,21 +130,11 @@ namespace elitecars_admin.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CarOptionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ModificationName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CarModId");
-
-                    b.HasIndex("CarId");
-
-                    b.HasIndex("CarOptionId");
 
                     b.ToTable("CarMods");
                 });
@@ -166,7 +147,13 @@ namespace elitecars_admin.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CarOptionId"));
 
-                    b.Property<int>("CarId")
+                    b.Property<int?>("CarAdminId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CarInventoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("OptionName")
@@ -175,18 +162,38 @@ namespace elitecars_admin.Migrations
 
                     b.HasKey("CarOptionId");
 
-                    b.HasIndex("CarId");
+                    b.HasIndex("CarId", "CarAdminId", "CarInventoryId");
 
                     b.ToTable("CarOptions");
+                });
+
+            modelBuilder.Entity("elitecars_admin.Models.CarOptionMod", b =>
+                {
+                    b.Property<int>("CarOptionModId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CarOptionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CarModId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("CarModId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("CarOptionModId", "CarOptionId", "CarModId");
+
+                    b.HasIndex("CarModId1");
+
+                    b.HasIndex("CarOptionId");
+
+                    b.ToTable("CarOptionMod");
                 });
 
             modelBuilder.Entity("elitecars_admin.Models.Cart", b =>
                 {
                     b.Property<int>("CartId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartId"));
 
                     b.Property<int>("CarId")
                         .HasColumnType("int");
@@ -198,7 +205,7 @@ namespace elitecars_admin.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CartId");
+                    b.HasKey("CartId", "CarId", "CustomerId");
 
                     b.HasIndex("CarId");
 
@@ -214,6 +221,10 @@ namespace elitecars_admin.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CustomerFirstName")
                         .IsRequired()
@@ -239,10 +250,7 @@ namespace elitecars_admin.Migrations
             modelBuilder.Entity("elitecars_admin.Models.Favorite", b =>
                 {
                     b.Property<int>("FavoriteId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FavoriteId"));
 
                     b.Property<int>("CarId")
                         .HasColumnType("int");
@@ -250,7 +258,7 @@ namespace elitecars_admin.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.HasKey("FavoriteId");
+                    b.HasKey("FavoriteId", "CarId", "CustomerId");
 
                     b.HasIndex("CarId");
 
@@ -290,6 +298,9 @@ namespace elitecars_admin.Migrations
                     b.Property<int>("CarId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DeliveryDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("IsPickup")
                         .HasColumnType("bit");
 
@@ -309,21 +320,12 @@ namespace elitecars_admin.Migrations
             modelBuilder.Entity("elitecars_admin.Models.OrderItem", b =>
                 {
                     b.Property<int>("OrderItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemId"));
-
-                    b.Property<int>("CarId")
                         .HasColumnType("int");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrdersCustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrdersOrderId")
+                    b.Property<int>("CarId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("PurchasePrice")
@@ -333,13 +335,13 @@ namespace elitecars_admin.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("OrderItemId");
+                    b.HasKey("OrderItemId", "OrderId", "CarId");
 
                     b.HasIndex("CarId");
 
-                    b.HasIndex("OrdersOrderId", "OrdersCustomerId");
+                    b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItem");
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("elitecars_admin.Models.Permission", b =>
@@ -409,15 +411,16 @@ namespace elitecars_admin.Migrations
 
             modelBuilder.Entity("elitecars_admin.Models.Car", b =>
                 {
-                    b.HasOne("elitecars_admin.Models.Inventory", "Inventory")
+                    b.HasOne("elitecars_admin.Models.Admin", "Admin")
                         .WithMany("Cars")
-                        .HasForeignKey("InventoryId")
+                        .HasForeignKey("AdminId")
+                        .HasPrincipalKey("AdminId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("elitecars_admin.Models.Admin", "Admin")
+                    b.HasOne("elitecars_admin.Models.Inventory", "Inventory")
                         .WithMany("Cars")
-                        .HasForeignKey("AdminId1", "AdminRoleId")
+                        .HasForeignKey("InventoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -426,34 +429,30 @@ namespace elitecars_admin.Migrations
                     b.Navigation("Inventory");
                 });
 
-            modelBuilder.Entity("elitecars_admin.Models.CarMod", b =>
+            modelBuilder.Entity("elitecars_admin.Models.CarOption", b =>
                 {
-                    b.HasOne("elitecars_admin.Models.Car", "Car")
-                        .WithMany("CarMods")
-                        .HasForeignKey("CarId")
+                    b.HasOne("elitecars_admin.Models.Car", null)
+                        .WithMany("CarOptions")
+                        .HasForeignKey("CarId", "CarAdminId", "CarInventoryId");
+                });
+
+            modelBuilder.Entity("elitecars_admin.Models.CarOptionMod", b =>
+                {
+                    b.HasOne("elitecars_admin.Models.CarMod", "CarMod")
+                        .WithMany("CarOptionMods")
+                        .HasForeignKey("CarModId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("elitecars_admin.Models.CarOption", "CarOption")
-                        .WithMany("CarMods")
+                        .WithMany("CarOptionMods")
                         .HasForeignKey("CarOptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Car");
+                    b.Navigation("CarMod");
 
                     b.Navigation("CarOption");
-                });
-
-            modelBuilder.Entity("elitecars_admin.Models.CarOption", b =>
-                {
-                    b.HasOne("elitecars_admin.Models.Car", "Car")
-                        .WithMany("CarOptions")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
                 });
 
             modelBuilder.Entity("elitecars_admin.Models.Cart", b =>
@@ -461,6 +460,7 @@ namespace elitecars_admin.Migrations
                     b.HasOne("elitecars_admin.Models.Car", "Cars")
                         .WithMany("Carts")
                         .HasForeignKey("CarId")
+                        .HasPrincipalKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -480,6 +480,7 @@ namespace elitecars_admin.Migrations
                     b.HasOne("elitecars_admin.Models.Car", "Car")
                         .WithMany("Favorites")
                         .HasForeignKey("CarId")
+                        .HasPrincipalKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -510,12 +511,14 @@ namespace elitecars_admin.Migrations
                     b.HasOne("elitecars_admin.Models.Car", "Car")
                         .WithMany("OrderItems")
                         .HasForeignKey("CarId")
+                        .HasPrincipalKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("elitecars_admin.Models.Order", "Orders")
                         .WithMany("OrderItems")
-                        .HasForeignKey("OrdersOrderId", "OrdersCustomerId")
+                        .HasForeignKey("OrderId")
+                        .HasPrincipalKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -550,8 +553,6 @@ namespace elitecars_admin.Migrations
 
             modelBuilder.Entity("elitecars_admin.Models.Car", b =>
                 {
-                    b.Navigation("CarMods");
-
                     b.Navigation("CarOptions");
 
                     b.Navigation("Carts");
@@ -561,9 +562,14 @@ namespace elitecars_admin.Migrations
                     b.Navigation("OrderItems");
                 });
 
+            modelBuilder.Entity("elitecars_admin.Models.CarMod", b =>
+                {
+                    b.Navigation("CarOptionMods");
+                });
+
             modelBuilder.Entity("elitecars_admin.Models.CarOption", b =>
                 {
-                    b.Navigation("CarMods");
+                    b.Navigation("CarOptionMods");
                 });
 
             modelBuilder.Entity("elitecars_admin.Models.Customer", b =>

@@ -6,57 +6,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace elitecars_admin.Migrations
 {
     /// <inheritdoc />
-    public partial class CompletedSchema : Migration
+    public partial class initialcreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "AdminId",
-                table: "Cars",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<int>(
-                name: "AdminId1",
-                table: "Cars",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<int>(
-                name: "AdminRoleId",
-                table: "Cars",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<int>(
-                name: "InventoryId",
-                table: "Cars",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
             migrationBuilder.CreateTable(
-                name: "CarOptions",
+                name: "CarMods",
                 columns: table => new
                 {
-                    CarOptionId = table.Column<int>(type: "int", nullable: false)
+                    CarModId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CarId = table.Column<int>(type: "int", nullable: false),
-                    OptionName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ModificationName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CarOptions", x => x.CarOptionId);
-                    table.ForeignKey(
-                        name: "FK_CarOptions_Cars_CarId",
-                        column: x => x.CarId,
-                        principalTable: "Cars",
-                        principalColumn: "CarId",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_CarMods", x => x.CarModId);
                 });
 
             migrationBuilder.CreateTable(
@@ -67,6 +33,7 @@ namespace elitecars_admin.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerFirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CustomerLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -115,87 +82,6 @@ namespace elitecars_admin.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CarMods",
-                columns: table => new
-                {
-                    CarModId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CarOptionId = table.Column<int>(type: "int", nullable: false),
-                    CarId = table.Column<int>(type: "int", nullable: false),
-                    ModificationName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CarMods", x => x.CarModId);
-                    table.ForeignKey(
-                        name: "FK_CarMods_CarOptions_CarOptionId",
-                        column: x => x.CarOptionId,
-                        principalTable: "CarOptions",
-                        principalColumn: "CarOptionId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CarMods_Cars_CarId",
-                        column: x => x.CarId,
-                        principalTable: "Cars",
-                        principalColumn: "CarId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Carts",
-                columns: table => new
-                {
-                    CartId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CarId = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Carts", x => x.CartId);
-                    table.ForeignKey(
-                        name: "FK_Carts_Cars_CarId",
-                        column: x => x.CarId,
-                        principalTable: "Cars",
-                        principalColumn: "CarId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Carts_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Favorites",
-                columns: table => new
-                {
-                    FavoriteId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CarId = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Favorites", x => x.FavoriteId);
-                    table.ForeignKey(
-                        name: "FK_Favorites_Cars_CarId",
-                        column: x => x.CarId,
-                        principalTable: "Cars",
-                        principalColumn: "CarId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Favorites_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -205,11 +91,13 @@ namespace elitecars_admin.Migrations
                     Status = table.Column<int>(type: "int", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeliveryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsPickup = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => new { x.OrderId, x.CustomerId });
+                    table.UniqueConstraint("AK_Orders_OrderId", x => x.OrderId);
                     table.ForeignKey(
                         name: "FK_Orders_Customers_CustomerId",
                         column: x => x.CustomerId,
@@ -232,6 +120,7 @@ namespace elitecars_admin.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Admin", x => new { x.AdminId, x.RoleId });
+                    table.UniqueConstraint("AK_Admin_AdminId", x => x.AdminId);
                     table.ForeignKey(
                         name: "FK_Admin_Roles_RoleId",
                         column: x => x.RoleId,
@@ -266,44 +155,166 @@ namespace elitecars_admin.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderItem",
+                name: "Cars",
                 columns: table => new
                 {
-                    OrderItemId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderId = table.Column<int>(type: "int", nullable: false),
                     CarId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PurchasePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    OrdersOrderId = table.Column<int>(type: "int", nullable: false),
-                    OrdersCustomerId = table.Column<int>(type: "int", nullable: false)
+                    AdminId = table.Column<int>(type: "int", nullable: false),
+                    InventoryId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IsModify = table.Column<bool>(type: "bit", nullable: false),
+                    CarType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderItem", x => x.OrderItemId);
+                    table.PrimaryKey("PK_Cars", x => new { x.CarId, x.AdminId, x.InventoryId });
+                    table.UniqueConstraint("AK_Cars_CarId", x => x.CarId);
                     table.ForeignKey(
-                        name: "FK_OrderItem_Cars_CarId",
+                        name: "FK_Cars_Admin_AdminId",
+                        column: x => x.AdminId,
+                        principalTable: "Admin",
+                        principalColumn: "AdminId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Cars_Inventories_InventoryId",
+                        column: x => x.InventoryId,
+                        principalTable: "Inventories",
+                        principalColumn: "InventoryId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CarOptions",
+                columns: table => new
+                {
+                    CarOptionId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OptionName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CarAdminId = table.Column<int>(type: "int", nullable: true),
+                    CarId = table.Column<int>(type: "int", nullable: true),
+                    CarInventoryId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarOptions", x => x.CarOptionId);
+                    table.ForeignKey(
+                        name: "FK_CarOptions_Cars_CarId_CarAdminId_CarInventoryId",
+                        columns: x => new { x.CarId, x.CarAdminId, x.CarInventoryId },
+                        principalTable: "Cars",
+                        principalColumns: new[] { "CarId", "AdminId", "InventoryId" });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Carts",
+                columns: table => new
+                {
+                    CartId = table.Column<int>(type: "int", nullable: false),
+                    CarId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carts", x => new { x.CartId, x.CarId, x.CustomerId });
+                    table.ForeignKey(
+                        name: "FK_Carts_Cars_CarId",
                         column: x => x.CarId,
                         principalTable: "Cars",
                         principalColumn: "CarId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderItem_Orders_OrdersOrderId_OrdersCustomerId",
-                        columns: x => new { x.OrdersOrderId, x.OrdersCustomerId },
-                        principalTable: "Orders",
-                        principalColumns: new[] { "OrderId", "CustomerId" },
+                        name: "FK_Carts_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Cars_AdminId1_AdminRoleId",
-                table: "Cars",
-                columns: new[] { "AdminId1", "AdminRoleId" });
+            migrationBuilder.CreateTable(
+                name: "Favorites",
+                columns: table => new
+                {
+                    FavoriteId = table.Column<int>(type: "int", nullable: false),
+                    CarId = table.Column<int>(type: "int", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Favorites", x => new { x.FavoriteId, x.CarId, x.CustomerId });
+                    table.ForeignKey(
+                        name: "FK_Favorites_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
+                        principalColumn: "CarId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Favorites_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Cars_InventoryId",
-                table: "Cars",
-                column: "InventoryId");
+            migrationBuilder.CreateTable(
+                name: "OrderItems",
+                columns: table => new
+                {
+                    OrderItemId = table.Column<int>(type: "int", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    CarId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PurchasePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderItems", x => new { x.OrderItemId, x.OrderId, x.CarId });
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
+                        principalColumn: "CarId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "OrderId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CarOptionMod",
+                columns: table => new
+                {
+                    CarOptionModId = table.Column<int>(type: "int", nullable: false),
+                    CarOptionId = table.Column<int>(type: "int", nullable: false),
+                    CarModId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CarModId1 = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarOptionMod", x => new { x.CarOptionModId, x.CarOptionId, x.CarModId });
+                    table.ForeignKey(
+                        name: "FK_CarOptionMod_CarMods_CarModId1",
+                        column: x => x.CarModId1,
+                        principalTable: "CarMods",
+                        principalColumn: "CarModId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CarOptionMod_CarOptions_CarOptionId",
+                        column: x => x.CarOptionId,
+                        principalTable: "CarOptions",
+                        principalColumn: "CarOptionId",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Admin_RoleId",
@@ -311,19 +322,29 @@ namespace elitecars_admin.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarMods_CarId",
-                table: "CarMods",
-                column: "CarId");
+                name: "IX_CarOptionMod_CarModId1",
+                table: "CarOptionMod",
+                column: "CarModId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarMods_CarOptionId",
-                table: "CarMods",
+                name: "IX_CarOptionMod_CarOptionId",
+                table: "CarOptionMod",
                 column: "CarOptionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarOptions_CarId",
+                name: "IX_CarOptions_CarId_CarAdminId_CarInventoryId",
                 table: "CarOptions",
-                column: "CarId");
+                columns: new[] { "CarId", "CarAdminId", "CarInventoryId" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cars_AdminId",
+                table: "Cars",
+                column: "AdminId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cars_InventoryId",
+                table: "Cars",
+                column: "InventoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carts_CarId",
@@ -346,14 +367,14 @@ namespace elitecars_admin.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderItem_CarId",
-                table: "OrderItem",
+                name: "IX_OrderItems_CarId",
+                table: "OrderItems",
                 column: "CarId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderItem_OrdersOrderId_OrdersCustomerId",
-                table: "OrderItem",
-                columns: new[] { "OrdersOrderId", "OrdersCustomerId" });
+                name: "IX_OrderItems_OrderId",
+                table: "OrderItems",
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerId",
@@ -369,40 +390,13 @@ namespace elitecars_admin.Migrations
                 name: "IX_RolePermissions_RoleId",
                 table: "RolePermissions",
                 column: "RoleId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Cars_Admin_AdminId1_AdminRoleId",
-                table: "Cars",
-                columns: new[] { "AdminId1", "AdminRoleId" },
-                principalTable: "Admin",
-                principalColumns: new[] { "AdminId", "RoleId" },
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Cars_Inventories_InventoryId",
-                table: "Cars",
-                column: "InventoryId",
-                principalTable: "Inventories",
-                principalColumn: "InventoryId",
-                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Cars_Admin_AdminId1_AdminRoleId",
-                table: "Cars");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Cars_Inventories_InventoryId",
-                table: "Cars");
-
             migrationBuilder.DropTable(
-                name: "Admin");
-
-            migrationBuilder.DropTable(
-                name: "CarMods");
+                name: "CarOptionMod");
 
             migrationBuilder.DropTable(
                 name: "Carts");
@@ -411,13 +405,13 @@ namespace elitecars_admin.Migrations
                 name: "Favorites");
 
             migrationBuilder.DropTable(
-                name: "Inventories");
-
-            migrationBuilder.DropTable(
-                name: "OrderItem");
+                name: "OrderItems");
 
             migrationBuilder.DropTable(
                 name: "RolePermissions");
+
+            migrationBuilder.DropTable(
+                name: "CarMods");
 
             migrationBuilder.DropTable(
                 name: "CarOptions");
@@ -429,34 +423,19 @@ namespace elitecars_admin.Migrations
                 name: "Permissions");
 
             migrationBuilder.DropTable(
-                name: "Roles");
+                name: "Cars");
 
             migrationBuilder.DropTable(
                 name: "Customers");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Cars_AdminId1_AdminRoleId",
-                table: "Cars");
+            migrationBuilder.DropTable(
+                name: "Admin");
 
-            migrationBuilder.DropIndex(
-                name: "IX_Cars_InventoryId",
-                table: "Cars");
+            migrationBuilder.DropTable(
+                name: "Inventories");
 
-            migrationBuilder.DropColumn(
-                name: "AdminId",
-                table: "Cars");
-
-            migrationBuilder.DropColumn(
-                name: "AdminId1",
-                table: "Cars");
-
-            migrationBuilder.DropColumn(
-                name: "AdminRoleId",
-                table: "Cars");
-
-            migrationBuilder.DropColumn(
-                name: "InventoryId",
-                table: "Cars");
+            migrationBuilder.DropTable(
+                name: "Roles");
         }
     }
 }
