@@ -26,6 +26,7 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        //RolePermission begins here
         modelBuilder
             .Entity<RolePermission>()
             .HasKey(rp => new
@@ -46,16 +47,18 @@ public class ApplicationDbContext : DbContext
             .HasOne(rp => rp.Permission)
             .WithMany(p => p.RolePermissions)
             .HasPrincipalKey(rp => rp.PermissionId);
+        //RolePermission ends here
 
-        //Admin to role
+        //Admin begins here
         modelBuilder.Entity<Admin>().HasKey(a => new { a.AdminId, a.RoleId });
         modelBuilder
             .Entity<Admin>()
             .HasOne(a => a.Role)
             .WithMany(r => r.Admin)
             .HasForeignKey(a => a.RoleId);
+        //Admin ends here
 
-        // CarOptionMod
+        // CarOptionMod begins here
         modelBuilder
             .Entity<CarOptionMod>()
             .HasKey(om => new
@@ -76,38 +79,7 @@ public class ApplicationDbContext : DbContext
             .HasOne(om => om.CarMod)
             .WithMany(cm => cm.CarOptionMods)
             .HasPrincipalKey(om => om.CarModId);
-
-        //CarMod Builder begins
-        // modelBuilder
-        //     .Entity<CarMod>()
-        //     .HasKey(cm => new
-        //     {
-        //         cm.CarModId,
-        //         // cm.CarOptionId,
-        //         // cm.CarId,
-        //     });
-
-        // modelBuilder
-        //     .Entity<CarMod>()
-        //     .HasOne(cm => cm.CarOption)
-        //     .WithMany(co => co.CarMods)
-        //     .HasPrincipalKey(cm => cm.CarOptionId);
-
-        // modelBuilder
-        //     .Entity<CarMod>()
-        //     .HasOne(cm => cm.Car)
-        //     .WithMany(c => c.CarMods)
-        //     .HasPrincipalKey(cm => cm.CarId);
-        //CarMod Builder ends
-
-        //CarOption Builder begins
-        // modelBuilder.Entity<CarOption>().HasKey(co => new { co.CarOptionId, co.CarId });
-        // modelBuilder
-        //     .Entity<CarOption>()
-        //     .HasOne(co => co.Car)
-        //     .WithMany(c => c.CarOptions)
-        //     .HasPrincipalKey(co => co.CarId);
-        // CarOption Builder ends
+        // CarOptionMod ends here
 
 
         //Favorite Builder begins
@@ -153,6 +125,7 @@ public class ApplicationDbContext : DbContext
             .HasOne(ct => ct.Customers)
             .WithMany(cs => cs.Carts)
             .HasPrincipalKey(ct => ct.CustomerId);
+        //Cart builder ends
 
         //Order Builder begins
         modelBuilder.Entity<Order>().HasKey(o => new { o.OrderId, o.CustomerId });
@@ -185,22 +158,9 @@ public class ApplicationDbContext : DbContext
             .WithMany(o => o.OrderItems)
             .HasPrincipalKey(ot => ot.OrderId);
 
+        //orderitme ends
+
         //Car  Builder begins
-
-        //modelBuilder.Entity<Car>()
-        //    .HasKey(c => new { c.CarId });
-        //modelBuilder.Entity<Car>()
-        //   .HasAlternateKey(c => new  { c.AdminId, c.InventoryId });
-        //modelBuilder.Entity<Car>()
-        //   .HasOne(c => c.Inventory)
-        //   .WithMany(i => i.Cars)
-        //   .HasForeignKey(c => c.InventoryId);
-
-        //modelBuilder.Entity<Car>()
-        //    .HasOne(c => c.Admin)
-        //    .WithMany(a => a.Cars)
-        //    .HasForeignKey(c => c.AdminId);
-
         modelBuilder
             .Entity<Car>()
             .HasKey(c => new
