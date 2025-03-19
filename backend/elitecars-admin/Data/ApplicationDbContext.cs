@@ -21,11 +21,15 @@ public class ApplicationDbContext : DbContext
     public DbSet<Order> Orders { get; set; } = null!;
     public DbSet<Permission> Permissions { get; set; } = null!;
     public DbSet<Role> Roles { get; set; } = null!;
+    public DbSet<OrderItem> OrderItems { get; set; } = null!;
     public DbSet<RolePermission> RolePermissions { get; set; } = null!;
+
+
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Composite Primary Key for RolePermission
+
         modelBuilder
             .Entity<RolePermission>()
             .HasKey(rp => new
@@ -39,13 +43,13 @@ public class ApplicationDbContext : DbContext
             .Entity<RolePermission>()
             .HasOne(rp => rp.Role)
             .WithMany(r => r.RolePermissions)
-            .HasForeignKey(rp => rp.RoleId);
+            .HasPrincipalKey(rp => rp.RoleId);
 
         modelBuilder
             .Entity<RolePermission>()
             .HasOne(rp => rp.Permission)
             .WithMany(p => p.RolePermissions)
-            .HasForeignKey(rp => rp.PermissionId);
+            .HasPrincipalKey(rp => rp.PermissionId);
 
         //Admin to role
         modelBuilder.Entity<Admin>().HasKey(a => new { a.AdminId, a.RoleId });
@@ -69,13 +73,13 @@ public class ApplicationDbContext : DbContext
             .Entity<CarMod>()
             .HasOne(cm => cm.CarOption)
             .WithMany(co => co.CarMods)
-            .HasForeignKey(cm => cm.CarOptionId);
+            .HasPrincipalKey(cm => cm.CarOptionId);
 
         modelBuilder
             .Entity<CarMod>()
             .HasOne(cm => cm.Car)
             .WithMany(c => c.CarMods)
-            .HasForeignKey(cm => cm.CarId);
+            .HasPrincipalKey(cm => cm.CarId);
         //CarMod Builder ends
 
         //CarOption Builder begins
@@ -101,13 +105,13 @@ public class ApplicationDbContext : DbContext
             .Entity<Favorite>()
             .HasOne(f => f.Car)
             .WithMany(c => c.Favorites)
-            .HasForeignKey(f => f.CarId);
+            .HasPrincipalKey(f => f.CarId);
 
         modelBuilder
             .Entity<Favorite>()
             .HasOne(f => f.Customer)
             .WithMany(cs => cs.Favorites)
-            .HasForeignKey(f => f.CustomerId);
+            .HasPrincipalKey(f => f.CustomerId);
         //Favorite Builder ends
 
 
@@ -124,13 +128,14 @@ public class ApplicationDbContext : DbContext
             .Entity<Cart>()
             .HasOne(ct => ct.Cars)
             .WithMany(c => c.Carts)
-            .HasForeignKey(ct => ct.CarId);
+            .HasPrincipalKey(ct => ct.CarId);
 
         modelBuilder
             .Entity<Cart>()
             .HasOne(ct => ct.Customers)
             .WithMany(cs => cs.Carts)
-            .HasForeignKey(ct => ct.CustomerId);
+            .HasPrincipalKey(ct => ct.CustomerId);
+
 
         //Order Builder begins
         modelBuilder.Entity<Order>().HasKey(o => new { o.OrderId, o.CustomerId });
@@ -155,15 +160,30 @@ public class ApplicationDbContext : DbContext
             .Entity<OrderItem>()
             .HasOne(ot => ot.Car)
             .WithMany(c => c.OrderItems)
-            .HasForeignKey(ot => ot.OrderItemId);
+            .HasPrincipalKey(ot => ot.CarId);
 
         modelBuilder
             .Entity<OrderItem>()
             .HasOne(ot => ot.Orders)
             .WithMany(o => o.OrderItems)
-            .HasForeignKey(ot => ot.OrderId);
+            .HasPrincipalKey(ot => ot.OrderId);
 
         //Car  Builder begins
+
+        //modelBuilder.Entity<Car>()
+        //    .HasKey(c => new { c.CarId });
+        //modelBuilder.Entity<Car>()
+        //   .HasAlternateKey(c => new  { c.AdminId, c.InventoryId });
+        //modelBuilder.Entity<Car>()
+        //   .HasOne(c => c.Inventory)
+        //   .WithMany(i => i.Cars)
+        //   .HasForeignKey(c => c.InventoryId);
+
+        //modelBuilder.Entity<Car>()
+        //    .HasOne(c => c.Admin)
+        //    .WithMany(a => a.Cars)
+        //    .HasForeignKey(c => c.AdminId);
+
         modelBuilder
             .Entity<Car>()
             .HasKey(c => new
@@ -176,7 +196,7 @@ public class ApplicationDbContext : DbContext
             .Entity<Car>()
             .HasOne(c => c.Inventory)
             .WithMany(i => i.Cars)
-            .HasForeignKey(c => c.InventoryId);
+            .HasPrincipalKey(c => c.InventoryId);
 
         modelBuilder
             .Entity<Car>()

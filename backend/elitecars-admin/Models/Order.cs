@@ -16,6 +16,7 @@
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
         public string Address { get; set; } = null!;
         public DateTime OrderDate { get; set; } = DateTime.Now;
+        public DateTime DeliveryDate { get; set; } = DateTime.Now;
         public bool IsPickup { get; set; } // New property to indicate pickup or delivery
 
         // Navigation properties
