@@ -379,10 +379,11 @@ C:\ITPA\Year_2\fall\Employment_Strategies\project\elitecars\EliteCars\backend\el
 C:\ITPA\Year_2\fall\Employment_Strategies\project\elitecars\EliteCars\backend\elitecars-admin\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.elitecars-admin.props
 C:\ITPA\Year_2\fall\Employment_Strategies\project\elitecars\EliteCars\backend\elitecars-admin\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.elitecars-admin.props
 C:\ITPA\Year_2\fall\Employment_Strategies\project\elitecars\EliteCars\backend\elitecars-admin\obj\Debug\net9.0\staticwebassets.pack.json
-C:\ITPA\Year_2\fall\Employment_Strategies\project\elitecars\EliteCars\backend\elitecars-admin\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\ITPA\Year_2\fall\Employment_Strategies\project\elitecars\EliteCars\backend\elitecars-admin\obj\Debug\net9.0\elitecar.81BE473F.Up2Date
 C:\ITPA\Year_2\fall\Employment_Strategies\project\elitecars\EliteCars\backend\elitecars-admin\obj\Debug\net9.0\elitecars-admin.dll
 C:\ITPA\Year_2\fall\Employment_Strategies\project\elitecars\EliteCars\backend\elitecars-admin\obj\Debug\net9.0\refint\elitecars-admin.dll
 C:\ITPA\Year_2\fall\Employment_Strategies\project\elitecars\EliteCars\backend\elitecars-admin\obj\Debug\net9.0\elitecars-admin.pdb
 C:\ITPA\Year_2\fall\Employment_Strategies\project\elitecars\EliteCars\backend\elitecars-admin\obj\Debug\net9.0\elitecars-admin.genruntimeconfig.cache
 C:\ITPA\Year_2\fall\Employment_Strategies\project\elitecars\EliteCars\backend\elitecars-admin\obj\Debug\net9.0\ref\elitecars-admin.dll
+C:\ITPA\Year_2\fall\Employment_Strategies\project\elitecars\EliteCars\backend\elitecars-admin\bin\Debug\net9.0\appsettings.json
+C:\ITPA\Year_2\fall\Employment_Strategies\project\elitecars\EliteCars\backend\elitecars-admin\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

@@ -26,14 +26,29 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
 
-       // modelBuilder.Entity<RolePermission>()
-                //composite primary key
-                //.HasKey(rp => new { rp.RolePermissionId, rp.RoleId, rp.PermissionId });
 
-        // relationship with role
+        // Composite Primary Key for RolePermission
+        modelBuilder.Entity<RolePermission>()
+            .HasKey(rp => new { rp.RolePermissionId, rp.RoleId, rp.PermissionId });
+
+        modelBuilder.Entity<RolePermission>()
+            .HasOne(rp => rp.Role)
+            .WithMany(r => r.RolePermissions)
+            .HasForeignKey(rp => rp.RoleId);
+
+        modelBuilder.Entity<RolePermission>()
+            .HasOne(rp => rp.Permission)
+            .WithMany(p => p.RolePermissions)
+            .HasForeignKey(rp => rp.PermissionId);
 
 
-        // relationship with role
+        //Admin to role
+        modelBuilder.Entity<Admin>()
+            .HasKey(a => new { a.AdminId, a.RoleId });
+        modelBuilder.Entity<Admin>()
+            .HasOne(a => a.Role)
+            .WithMany(r => r.Admin)
+            .HasForeignKey(a => a.RoleId);
 
         //CarMod Builder begins
         modelBuilder.Entity<CarMod>()
@@ -62,21 +77,54 @@ public class ApplicationDbContext : DbContext
 
         //Favorite Builder begins
         modelBuilder.Entity<Favorite>()
-            .HasKey(f => new { f.FavoriteId, f.CarId });
+            .HasKey(f => new { f.FavoriteId, f.CarId,f.CustomerId });
         modelBuilder.Entity<Favorite>()
             .HasOne(f => f.Car)
             .WithMany(c => c.Favorites)
             .HasForeignKey(f => f.CarId);
+
+        modelBuilder.Entity<Favorite>()
+            .HasOne(f => f.Customer)
+            .WithMany(cs => cs.Favorites)
+            .HasForeignKey(f => f.CustomerId);
         //Favorite Builder ends
+
+
+        //Cart builder begins
+        modelBuilder.Entity<Cart>()
+            .HasKey(ct => new { ct.CartId, ct.CarId, ct.CustomerId });
+        modelBuilder.Entity<Cart>()
+            .HasOne(ct => ct.Cars)
+            .WithMany(c => c.Carts)
+            .HasForeignKey(ct => ct.CarId);
+
+        modelBuilder.Entity<Cart>()
+            .HasOne(ct => ct.Customers)
+            .WithMany(cs => cs.Carts)
+            .HasForeignKey(ct => ct.CustomerId);
 
         //Order Builder begins
         modelBuilder.Entity<Order>()
-            .HasKey( o => new {o.OrderId, o.CarId});
+            .HasKey( o => new {o.OrderId, o.CustomerId});
         modelBuilder.Entity<Order>()
-            .HasOne(o => o.Car)
-            .WithMany(c => c.Orders)
-            .HasForeignKey(o => o.CarId);
+            .HasOne(o => o.Customer)
+            .WithMany(cu => cu.Orders)
+            .HasForeignKey(o => o.CustomerId);
         //Order Builder ends
+
+
+        //orderitme begins
+        modelBuilder.Entity<OrderItem>()
+            .HasKey ( ot => new {ot.OrderItemId, ot.OrderId, ot.CarId});
+        modelBuilder.Entity<OrderItem>()
+            .HasOne(ot => ot.Car)
+            .WithMany(c => c.OrderItems)
+            .HasForeignKey(ot => ot.OrderItemId);
+
+        modelBuilder.Entity<OrderItem>()
+            .HasOne(ot => ot.Orders)
+            .WithMany(o => o.OrderItems)
+            .HasForeignKey(ot => ot.OrderId);
 
         //Car  Builder begins
         modelBuilder.Entity<Car>()
