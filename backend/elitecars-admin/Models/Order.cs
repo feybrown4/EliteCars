@@ -20,8 +20,6 @@
         public bool IsPickup { get; set; } // New property to indicate pickup or delivery
 
         // Navigation properties
-        // public Car Car { get; set; } = null!;
-
         public ICollection<OrderItem> OrderItems { get; set; } = null!;
         public Customer Customer { get; set; } = null!;
     }
