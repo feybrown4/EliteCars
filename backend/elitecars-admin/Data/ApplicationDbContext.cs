@@ -182,8 +182,7 @@ public class ApplicationDbContext : DbContext
             .Entity<Car>()
             .HasOne(c => c.Admin)
             .WithMany(a => a.Cars)
-            .HasForeignKey(c => new { c.AdminId })
-            .HasPrincipalKey(a => new { a.AdminId });
+            .HasPrincipalKey(a => a.AdminId);
         //Car  Builder ends
     }
 }
