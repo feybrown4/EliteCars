@@ -26,7 +26,7 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
 
-
+        base.OnModelCreating(modelBuilder);
         // Composite Primary Key for RolePermission
         modelBuilder.Entity<RolePermission>()
             .HasKey(rp => new { rp.RolePermissionId, rp.RoleId, rp.PermissionId });
@@ -127,17 +127,19 @@ public class ApplicationDbContext : DbContext
             .HasForeignKey(ot => ot.OrderId);
 
         //Car  Builder begins
-        modelBuilder.Entity<Car>()
-            .HasKey(c => new  { c.CarId, c.AdminId, c.InventoryId });
-        modelBuilder.Entity<Car>()
-           .HasOne(c => c.Inventory)
-           .WithMany(i => i.Cars)
-           .HasForeignKey(c => c.InventoryId);
+        //modelBuilder.Entity<Car>()
+        //    .HasKey(c => new { c.CarId });
+        //modelBuilder.Entity<Car>()
+        //   .HasAlternateKey(c => new  { c.AdminId, c.InventoryId });
+        //modelBuilder.Entity<Car>()
+        //   .HasOne(c => c.Inventory)
+        //   .WithMany(i => i.Cars)
+        //   .HasForeignKey(c => c.InventoryId);
 
-        modelBuilder.Entity<Car>()
-            .HasOne(c => c.Admin)
-            .WithMany(a => a.Cars)
-            .HasForeignKey(c => c.AdminId);
+        //modelBuilder.Entity<Car>()
+        //    .HasOne(c => c.Admin)
+        //    .WithMany(a => a.Cars)
+        //    .HasForeignKey(c => c.AdminId);
         //Car  Builder ends
 
     }
