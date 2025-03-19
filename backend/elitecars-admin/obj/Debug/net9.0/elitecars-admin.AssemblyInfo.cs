@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("elitecars-admin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+05abf53de4d3c0a4f70bff446c7fecc732e4daf8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8d0f4aa2f0a9f3a6e642702d3e5cbdc6591c0445")]
 [assembly: System.Reflection.AssemblyProductAttribute("elitecars-admin")]
 [assembly: System.Reflection.AssemblyTitleAttribute("elitecars-admin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
