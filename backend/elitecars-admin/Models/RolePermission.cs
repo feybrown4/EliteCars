@@ -7,7 +7,7 @@
         public int PermissionId { get; set; }
 
         // Navigation properties
-        public ICollection<Role> Role { get; set; } = null!;
-        public ICollection<Permission> Permission { get; set; } = null!;
+        public Role Role { get; set; } = null!;
+        public Permission Permission { get; set; } = null!;
     }
 }

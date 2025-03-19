@@ -34,13 +34,15 @@ public class Car
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     public int AdminId { get; set; }
+    public int InventoryId { get; set; }
 
     // Navigation properties
     public Admin Admin { get; set; } = null!;
     public ICollection<Favorite> Favorites { get; set; } = null!;
     public ICollection<Cart> Carts { get; set; } = null!;
-    public ICollection<Order> Orders { get; set; } = null!;
+    //public ICollection<Order> Orders { get; set; } = null!;
+    public ICollection<OrderItem> OrderItems { get; set; } = null!;
     public ICollection<CarOption> CarOptions { get; set; } = null!;
-    public ICollection<Inventory> Inventories { get; set; } = null!;
+    public Inventory Inventory { get; set; } = null!;
     public ICollection<CarMod> CarMods { get; set; } = null!;
 }

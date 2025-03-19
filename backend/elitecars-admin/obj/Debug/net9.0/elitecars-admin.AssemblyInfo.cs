@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("elitecars-admin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23124642900d68bfa2ddbc988441ee8d78eabdf1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0b206c125e76c3b1938f22429ab23becaceb43b8")]
 [assembly: System.Reflection.AssemblyProductAttribute("elitecars-admin")]
 [assembly: System.Reflection.AssemblyTitleAttribute("elitecars-admin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

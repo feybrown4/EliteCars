@@ -6,6 +6,6 @@ public class Role
     public string RoleName { get; set; } = null!;
 
     // Navigation properties
-    public RolePermission RolePermissions { get; set; } = null!;
+    public ICollection<RolePermission> RolePermissions { get; set; } = null!;
     public ICollection<Admin> Admin { get; set; } = null!;
 }
