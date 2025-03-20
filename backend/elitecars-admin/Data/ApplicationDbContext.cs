@@ -13,7 +13,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Admin> Admin => Set<Admin>();
     public DbSet<Customer> Customers => Set<Customer>();
     public DbSet<CarMod> CarMods => Set<CarMod>();
-
+    public DbSet<CarOptionMod> CarOptionMods => Set<CarOptionMod>();
     public DbSet<CarOption> CarOptions => Set<CarOption>();
     public DbSet<Cart> Carts => Set<Cart>();
     public DbSet<Favorite> Favorites { get; set; } = null!;

@@ -24,6 +24,22 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
+// Seed the database using Bogus
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<ApplicationDbContext>();
+       
+        DbSeeder.Seed(context);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error seeding database: {ex.Message}");
+    }
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
