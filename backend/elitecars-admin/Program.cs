@@ -31,7 +31,7 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<ApplicationDbContext>();
-       
+        context.Database.Migrate();
         DbSeeder.Seed(context);
     }
     catch (Exception ex)

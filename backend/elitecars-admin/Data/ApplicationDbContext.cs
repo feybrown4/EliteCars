@@ -26,6 +26,7 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
         //RolePermission begins here
         modelBuilder
             .Entity<RolePermission>()
