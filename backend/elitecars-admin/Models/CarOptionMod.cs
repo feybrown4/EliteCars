@@ -4,7 +4,7 @@ namespace elitecars_admin.Models
     {
         public int CarOptionModId { get; set; }
         public int CarOptionId { get; set; }
-        public string CarModId { get; set; } = null!;
+        public int CarModId { get; set; } 
 
         // Navigation properties
         public CarOption CarOption { get; set; } = null!;

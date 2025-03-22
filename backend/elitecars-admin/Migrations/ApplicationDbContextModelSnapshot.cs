@@ -172,19 +172,16 @@ namespace elitecars_admin.Migrations
                     b.Property<int>("CarOptionId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CarModId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("CarModId1")
+                    b.Property<int>("CarModId")
                         .HasColumnType("int");
 
                     b.HasKey("CarOptionModId", "CarOptionId", "CarModId");
 
-                    b.HasIndex("CarModId1");
+                    b.HasIndex("CarModId");
 
                     b.HasIndex("CarOptionId");
 
-                    b.ToTable("CarOptionMod");
+                    b.ToTable("CarOptionMods");
                 });
 
             modelBuilder.Entity("elitecars_admin.Models.Cart", b =>
@@ -437,7 +434,7 @@ namespace elitecars_admin.Migrations
                 {
                     b.HasOne("elitecars_admin.Models.CarMod", "CarMod")
                         .WithMany("CarOptionMods")
-                        .HasForeignKey("CarModId1")
+                        .HasForeignKey("CarModId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

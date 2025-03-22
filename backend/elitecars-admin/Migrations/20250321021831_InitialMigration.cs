@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace elitecars_admin.Migrations
 {
     /// <inheritdoc />
-    public partial class initialcreate : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -291,25 +291,24 @@ namespace elitecars_admin.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CarOptionMod",
+                name: "CarOptionMods",
                 columns: table => new
                 {
                     CarOptionModId = table.Column<int>(type: "int", nullable: false),
                     CarOptionId = table.Column<int>(type: "int", nullable: false),
-                    CarModId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CarModId1 = table.Column<int>(type: "int", nullable: false)
+                    CarModId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CarOptionMod", x => new { x.CarOptionModId, x.CarOptionId, x.CarModId });
+                    table.PrimaryKey("PK_CarOptionMods", x => new { x.CarOptionModId, x.CarOptionId, x.CarModId });
                     table.ForeignKey(
-                        name: "FK_CarOptionMod_CarMods_CarModId1",
-                        column: x => x.CarModId1,
+                        name: "FK_CarOptionMods_CarMods_CarModId",
+                        column: x => x.CarModId,
                         principalTable: "CarMods",
                         principalColumn: "CarModId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CarOptionMod_CarOptions_CarOptionId",
+                        name: "FK_CarOptionMods_CarOptions_CarOptionId",
                         column: x => x.CarOptionId,
                         principalTable: "CarOptions",
                         principalColumn: "CarOptionId",
@@ -322,13 +321,13 @@ namespace elitecars_admin.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarOptionMod_CarModId1",
-                table: "CarOptionMod",
-                column: "CarModId1");
+                name: "IX_CarOptionMods_CarModId",
+                table: "CarOptionMods",
+                column: "CarModId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarOptionMod_CarOptionId",
-                table: "CarOptionMod",
+                name: "IX_CarOptionMods_CarOptionId",
+                table: "CarOptionMods",
                 column: "CarOptionId");
 
             migrationBuilder.CreateIndex(
@@ -396,7 +395,7 @@ namespace elitecars_admin.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CarOptionMod");
+                name: "CarOptionMods");
 
             migrationBuilder.DropTable(
                 name: "Carts");
