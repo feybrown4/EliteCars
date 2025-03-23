@@ -387,3 +387,4 @@ C:\ITPA\Year_2\fall\Employment_Strategies\project\elitecars\EliteCars\backend\el
 C:\ITPA\Year_2\fall\Employment_Strategies\project\elitecars\EliteCars\backend\elitecars-admin\obj\Debug\net9.0\ref\elitecars-admin.dll
 C:\ITPA\Year_2\fall\Employment_Strategies\project\elitecars\EliteCars\backend\elitecars-admin\bin\Debug\net9.0\appsettings.json
 C:\ITPA\Year_2\fall\Employment_Strategies\project\elitecars\EliteCars\backend\elitecars-admin\bin\Debug\net9.0\Bogus.dll
+C:\Users\Amiel Solution\Documents\EliteCars\backend\elitecars-admin\bin\Debug\net9.0\Bogus.dll
